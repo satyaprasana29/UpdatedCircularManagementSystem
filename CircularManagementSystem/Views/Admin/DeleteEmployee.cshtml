@@ -1,0 +1,28 @@
+﻿@model CircularManagementSystem.Entity.Employee
+
+@{
+    ViewBag.Title = "DeleteEmployee";
+}
+<div class="AddDepartment-container">
+<h2 class="title">DeleteEmployee</h2>
+    <hr/>
+@using(Html.BeginForm("DeleteEmployee","Admin",FormMethod.Post))
+{
+    <div class="form">
+        @Html.HiddenFor(Model=>Model.EmployeeId)
+        <div>
+                @Html.LabelFor(Model=>Model.EmployeeName,new { @class = "DeleteEmployee-label" }):  
+                @Html.ValueFor(Model=>Model.EmployeeName)
+                </div>
+                <div>
+                @Html.LabelFor(Model=>Model.EmployeePhoneNumber,new { @class = "DeleteEmployee-label" }):  
+                @Html.ValueFor(Model=>Model.EmployeePhoneNumber)
+                </div>
+            <div>
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Confirm Delete" class="submit-DeleteEmployee" />
+            </div>
+    </div>
+}
+    </div>
+

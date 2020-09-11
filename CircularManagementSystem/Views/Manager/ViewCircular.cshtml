@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CircularManagementSystem.Entity.Circular>
+
+@{
+    ViewBag.Title = "ViewCircular";
+}
+
+<h2>ViewCircular</h2>
+
+@foreach (CircularManagementSystem.Entity.Circular circular in Model)
+{
+    <table>
+        <tr>
+            <td>
+                Circular Name
+            </td>
+            <td>
+                @circular.CircularName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Circular Message
+            </td>
+            <td>
+                @circular.Message
+            </td>
+        </tr>
+    </table>
+}

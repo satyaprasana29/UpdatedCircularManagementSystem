@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CircularManagementSystem.Entity.Employee>
+
+@{
+    ViewBag.Title = "ViewEmployee";
+}
+<link href="~/CSS/Styles.css" rel="stylesheet" type="text/css" />
+
+<div class="ViewEmployee-container">
+<div class="table">
+    <h2>List of Employees</h2>
+    <table border="1">
+        <tr>
+            <td>
+                EmployeeName
+            </td>
+
+            <td>
+                EmployeePhoneNumber
+            </td>
+            <td>
+                Employee Gender
+            </td>
+            <td>
+                Employee email
+            </td>
+            <td>
+                EmployeeDesignation
+            </td>
+            <td>
+                Department
+            </td>
+            <td>
+                Manager
+            </td>
+        </tr>
+        @foreach (CircularManagementSystem.Entity.Employee employees in Model)
+        {
+            <tr>
+                <td>
+                    @employees.EmployeeName
+                </td>
+                <td>
+                    @employees.EmployeePhoneNumber
+                </td>
+                <td>
+                    @employees.EmployeeGender
+                </td>
+                <td>
+                    @employees.EmployeeEmail
+                </td>
+                <td>
+                    @employees.EmployeeDesignations.DesignationName
+                </td>
+                <td>
+                    @employees.Departments.DepartmentName
+                </td>
+                <td>
+                    @employees.Manager.ManagerName
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditEmployee", new { employeeId = employees.EmployeeId },new {@class="button" })|
+                    @Html.ActionLink("Delete", "DeleteEmployee", new { employeeId = employees.EmployeeId },new { @class="button"})
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+    </div>

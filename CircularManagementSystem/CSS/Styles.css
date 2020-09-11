@@ -1,0 +1,243 @@
+﻿body {
+    margin: 0;
+    font-family: 'Mulish', sans-serif;
+}
+/*Layout*/
+.navbar {
+    overflow:hidden;
+    background-color: #14b1ab;
+}
+.navbar-item{
+    float:right;
+    display:block;
+    color:#f2f2f2;
+    text-align:center;
+    padding:14px 30px;
+    text-decoration:none;
+}
+.logo-image{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    height:70px;
+}
+/*Login*/
+.password{
+    margin-top:15px;
+    margin-left:10px;
+}
+.username {
+    margin-left: 3px;
+}
+.submit {
+    background-color: #4CAF50; /* Green */
+    border:none;
+    border-radius:5%;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    font-size: 13px;
+    margin-top:3%;
+    margin-left:6%;
+
+}
+.reset {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 5%;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 3%;
+    margin-left: 20%;
+}
+.login-container {
+    margin-top:5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding-top:0%;
+    padding-left:3%;
+    padding-right:3%;
+    padding-bottom:1%;
+    border: solid;
+    text-align: center;
+    border-radius: 3%;
+}
+/*View Employee*/
+.Menu{
+    padding-left:5%; 
+}
+.ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+.list-item {
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+.list-item:hover {
+        background-color: #555;
+        color: white;
+}
+.table{
+    margin-left:20%;
+}
+.button {
+    background-color: #e7e7e7;
+    color: black;
+    border: none;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+.button:hover{
+    background-color:red;
+} 
+/*AddEmployee*/
+.title
+{
+    padding-top:2%;
+    margin-left:35%;
+}
+.AddEmployee-container {
+    background-color: #f1f1f1;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.AddEmployee-textboxName{
+    margin-left:15%;
+    margin-bottom:1%;
+}
+.AddEmployee-textboxPhone {
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+.AddEmployee-textboxEmail {
+    margin-left: 15.5%;
+    margin-bottom: 1%;
+}
+.AddEmployee-label {
+    margin-left: 5%;
+}
+.AddEmployee-radioMale{
+    margin-bottom:2%;
+    margin-left:13.5%;
+}
+.AddEmployee-textboxDepartment{
+    margin-left:19%;
+    margin-bottom:1%;
+}
+.AddEmployee-textboxDesignation{
+    margin-left:7.5%;
+    margin-bottom:1%;
+}
+.AddEmployee-textboxManager {
+    margin-left: 22.8%;
+    margin-bottom: 2%;
+}
+.reset-AddEmployee {
+    background-color: #e7e7e7;
+    color: black;
+    border: none;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 30%;
+    margin-bottom:1.5%;
+    cursor: pointer;
+}
+.submit-AddEmployee {
+    background-color: #e7e7e7;
+    color: black;
+    border: none;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 2%;
+    margin-bottom:1.5%;
+    cursor: pointer;
+}
+.submit-AddEmployee:hover {
+    background-color: forestgreen;
+}
+.reset-AddEmployee:hover {
+    background-color: forestgreen;
+} 
+/*Edit-Employee*/
+.EditEmployee-container {
+    background-color: #f1f1f1;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.submit-EditEmployee {
+    background-color: #e7e7e7;
+    color: black;
+    border: none;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 41%;
+    margin-bottom: 1.5%;
+    cursor: pointer;
+}
+.submit-EditEmployee:hover {
+    background-color: forestgreen;
+}
+/*Add Department*/
+.AddDepartment-container {
+    background-color: #f1f1f1;
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 40%;
+}
+.Department-label{
+    margin-left:5%;
+}
+.Department-textbox{
+    margin-left:5%;
+    margin-bottom:1.5%;
+}
+/*Delete-Employee*/
+.DeleteEmployee-label{
+    margin-left:7%;
+    margin-bottom:3%;
+}
+.submit-DeleteEmployee {
+    background-color: #e7e7e7;
+    color: black;
+    border: none;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 41%;
+    margin-top:1%;
+    margin-bottom: 1.5%;
+    cursor: pointer;
+}
+.submit-DeleteEmployee:hover{
+    background-color:red;
+}

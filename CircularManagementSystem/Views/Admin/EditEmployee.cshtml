@@ -1,0 +1,56 @@
+﻿@model CircularManagementSystem.Models.EmployeeModel
+
+@{
+    ViewBag.Title = "EditEmployee";
+}
+<div class="EditEmployee-container">
+<h2 class="title">EditEmployee</h2>
+    <hr/>
+@using (Html.BeginForm("EditEmployee", "Admin", FormMethod.Post))
+{
+    @Html.HiddenFor(model=>model.EmployeeId)
+    <div class="form">
+        <div>
+                @Html.LabelFor(model => model.EmployeeName,new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeeName,new { @class = "AddEmployee-textboxName" })
+                @Html.ValidationMessageFor(model => model.EmployeeName)
+            </div>
+        <div>
+                @Html.LabelFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-textboxPhone" })
+                @Html.ValidationMessageFor(model => model.EmployeePhoneNumber)
+         </div>
+        <div>
+                @Html.LabelFor(model => model.EmployeeEmail,new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeeEmail,new { @class = "AddEmployee-textboxEmail" })
+                @Html.ValidationMessageFor(model => model.EmployeeEmail)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.EmployeeGender, new { @class = "AddEmployee-label" })
+            @Html.RadioButtonFor(model => model.EmployeeGender, "Male", new { @class = "AddEmployee-radioMale" })
+            @Html.Label("Male", new { @class = "AddEmployee-radiolabelMale" })
+            @Html.RadioButtonFor(Model => Model.EmployeeGender, "Female", new { @class = "AddEmployee-radioFemale" })
+            @Html.Label("Female", new { @class = "AddEmployee-radiolabelFemale" })
+            @*@Html.LabelFor(model => model.EmployeeGender,new { @class = "AddEmployee-label" })
+        @Html.Label("Male")
+        @Html.RadioButtonFor(model => model.EmployeeGender, "Male")
+        @Html.Label("Female")
+        @Html.RadioButtonFor(Model => Model.EmployeeGender, "Female")*@
+        </div>
+        <div>
+                @Html.LabelFor(model => model.Department,new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.Department,"select department",new { @class = "AddEmployee-textboxDepartment" })
+            </div>
+        <div>
+                @Html.LabelFor(model => model.EmployeeDesignation,new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.DesignationId, (IEnumerable<SelectListItem>)ViewBag.Designation, "select Designation",new { @class = "AddEmployee-textboxDesignation" })
+            </div>
+        <div>
+                @Html.LabelFor(model => model.Manager,new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.ManagerId, (IEnumerable<SelectListItem>)ViewBag.Manager, "select Manager",new { @class = "AddEmployee-textboxManager" })
+            </div>
+                @Html.AntiForgeryToken()
+    <input type="submit" class="submit-EditEmployee" />
+    </div>
+}
+    </div>

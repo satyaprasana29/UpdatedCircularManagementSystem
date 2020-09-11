@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/CSS/Styles.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="~/Images/Aspire_System_logo.png" class="logo-image" alt="Aspire_System_logo" />
+        <div class="navbar">
+            @Html.ActionLink("Home", "Index", "Home",new {area="Home" }, new { @class = "navbar-item" })
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Logout", "LogOff", "Home",new { area="Home"}, new { @class = "navbar-item" })
+            }
+
+            else
+            {
+                @Html.ActionLink("Login", "Login", "Home",new { area="Home"}, new { @class = "navbar-item" })
+            }
+            @*@if (HttpContext.Current.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("AddDepartment", "AddDepartment", "Admin")
+                @Html.ActionLink("AddEmployee", "AddEmployee", "Admin")
+                @Html.ActionLink("DeleteDepartment", "DeleteDepartment", "Admin")
+                @Html.ActionLink("DeleteEmployee", "DeleteEmployee", "Admin")
+                @Html.ActionLink("EditEmployee", "EditEmployee", "Admin")
+                @Html.ActionLink("ViewDepartment", "ViewDepartment", "Admin")
+                @Html.ActionLink("ViewEmployee", "ViewEmployee", "Admin")
+            }
+            @if (HttpContext.Current.User.IsInRole("User"))
+            {
+                @Html.ActionLink("ViewCircular", "ViewCircular", "User")
+            }
+            @if (HttpContext.Current.User.IsInRole("Manager"))
+            {
+                @Html.ActionLink("ViewCircular", "ViewCircular", "Manager")
+                @Html.ActionLink("AddCircular", "AddCircular", "Manager")
+            }*@
+        </div>
+        <div class="navbar-ViewEmployee">
+            <h3 class="Menu">Menu</h3>
+            <ul class="ul">
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("AddDepartment", "AddDepartment","Admin",new {area="Admin" },new { @class="list-item"})</li>
+                    <li> @Html.ActionLink("AddEmployee", "AddEmployee", "Admin",new {area="Admin" },new { @class="list-item"})</li>
+                    <li>@Html.ActionLink("ViewDepartment", "ViewDepartment", "Admin",new {area="Admin" },new { @class="list-item"})</li>
+                    <li>@Html.ActionLink("ViewEmployee", "ViewEmployee", "Admin",new {area="Admin" },new { @class="list-item"})</li>
+                }
+                @if (HttpContext.Current.User.IsInRole("User"))
+                {
+                    <li>@Html.ActionLink("ViewCircular", "ViewCircular", "User",new {area="User" },new { @class="list-item"})</li>
+                }
+                @if (HttpContext.Current.User.IsInRole("Manager"))
+                {
+                    <li>@Html.ActionLink("ViewCircular", "ViewCircular", "Manager",new {area="Manager" },new { @class="list-item"})</li>
+                    <li>@Html.ActionLink("AddCircular", "AddCircular","Manager",new {area="Manager" },new { @class="list-item"})</li>
+                }
+            </ul>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <footer>
+        </footer>
+    </div>
+    
+        
+</body>
+</html>

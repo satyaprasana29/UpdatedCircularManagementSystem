@@ -1,0 +1,30 @@
+﻿@model CircularManagementSystem.Entity.Circular
+
+@{
+    ViewBag.Title = "AddCircular";
+}
+
+<h2>AddCircular</h2>
+@using(Html.BeginForm("AddCircular","Manager",FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(Model=>Model.CircularName)
+            </td>
+            <td>
+                @Html.EditorFor(Model=>Model.CircularName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button >Choose file</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="AddCircular" />
+            </td>
+        </tr>
+    </table>
+}

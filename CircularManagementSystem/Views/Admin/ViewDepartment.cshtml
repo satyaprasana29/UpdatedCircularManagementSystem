@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CircularManagementSystem.Entity.Department>
+
+@{
+    ViewBag.Title = "ViewDepartment";
+}
+    <link href="~/CSS/Styles.css" rel="stylesheet" type="text/css" />
+
+    <div class="ViewDepartment-container">
+        <div class="table">
+            <h2>ViewDepartment</h2>
+            <table border="1">
+                <tr>
+                    <td>
+                        DepartmentId
+                    </td>
+                    <td>
+                        Department Name
+                    </td>
+                </tr>
+                @foreach (CircularManagementSystem.Entity.Department department in Model)
+                {
+                    <tr>
+                        <td>
+                            @department.DepartmentId
+                        </td>
+                        <td>
+                            @department.DepartmentName
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteDepartment", new { departmentId = department.DepartmentId },new {@class="button" })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+</div>
