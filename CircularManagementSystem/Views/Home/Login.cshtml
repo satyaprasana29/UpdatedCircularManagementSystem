@@ -1,10 +1,8 @@
 ﻿@model CircularManagementSystem.Models.AccountModel
-
 @{
     ViewBag.Title = "Login";
 }
 <link href="~/CSS/Styles.css" rel="stylesheet" type="text/css" />
-
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
     
@@ -13,18 +11,22 @@
     <hr />
     <div class="username-label">
         @Html.LabelFor(model => model.UserName)
-        @Html.TextBoxFor(model => model.UserName, new { @class = "username" })
+        @Html.TextBoxFor(model => model.UserName, new { placeholder="Enter the username...",maxlength=25,autocomplete="off", @class = "username" })
+        @Html.ValidationMessageFor(model=>model.UserName,"",new { @class="ValidUserName"})
     </div>
     <div class="password-label">
         @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "password" })
+        @Html.PasswordFor(model => model.Password,new { placeholder = "Enter the password...",maxlength=10, @class = "password"} )
+        @Html.ValidationMessageFor(model=>model.Password,"",new { @class= "ValidUserName" })
     </div>
     <button type="reset" class="reset">Reset</button>
     <button type="submit" class="submit">Submit</button>
-    @if (ViewBag.Message != null)
-    {
-        @ViewBag.Message
-    }
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            @ViewBag.Message
+        }
+    </div>
 </div>
 }
 

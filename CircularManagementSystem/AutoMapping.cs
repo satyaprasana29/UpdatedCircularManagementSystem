@@ -12,6 +12,7 @@ namespace CircularManagementSystem
             {
                 config.CreateMap<EmployeeModel, Employee>();
                 config.CreateMap<Employee,EmployeeModel>();
+                config.CreateMap<CircularModel, Circular>();
             });
         }
     }

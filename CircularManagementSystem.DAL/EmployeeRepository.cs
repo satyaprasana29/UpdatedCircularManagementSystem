@@ -90,6 +90,18 @@ namespace CircularManagementSystem.DAL
                 //contextClass.SaveChanges();
             }
         }
+        public bool CheckEmployee(string employeeEmail,long phoneNumber)
+        {
+            using(ContextClass contextClass=new ContextClass())
+            {
+                Employee employee= contextClass.Employees.Where(x => x.EmployeeEmail == employeeEmail).Where(y => y.EmployeePhoneNumber == phoneNumber).SingleOrDefault();
+                if(employee!=null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
         public List<Employee> GetEmployees()
         {
             using (ContextClass contextClass = new ContextClass())

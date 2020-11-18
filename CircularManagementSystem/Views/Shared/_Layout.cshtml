@@ -21,25 +21,6 @@
             {
                 @Html.ActionLink("Login", "Login", "Home",new { area="Home"}, new { @class = "navbar-item" })
             }
-            @*@if (HttpContext.Current.User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("AddDepartment", "AddDepartment", "Admin")
-                @Html.ActionLink("AddEmployee", "AddEmployee", "Admin")
-                @Html.ActionLink("DeleteDepartment", "DeleteDepartment", "Admin")
-                @Html.ActionLink("DeleteEmployee", "DeleteEmployee", "Admin")
-                @Html.ActionLink("EditEmployee", "EditEmployee", "Admin")
-                @Html.ActionLink("ViewDepartment", "ViewDepartment", "Admin")
-                @Html.ActionLink("ViewEmployee", "ViewEmployee", "Admin")
-            }
-            @if (HttpContext.Current.User.IsInRole("User"))
-            {
-                @Html.ActionLink("ViewCircular", "ViewCircular", "User")
-            }
-            @if (HttpContext.Current.User.IsInRole("Manager"))
-            {
-                @Html.ActionLink("ViewCircular", "ViewCircular", "Manager")
-                @Html.ActionLink("AddCircular", "AddCircular", "Manager")
-            }*@
         </div>
         <div class="navbar-ViewEmployee">
             <h3 class="Menu">Menu</h3>
@@ -63,6 +44,7 @@
             </ul>
 
         </div>
+        
     </div>
     <div class="container body-content">
         @RenderBody()

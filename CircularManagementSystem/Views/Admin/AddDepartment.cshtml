@@ -9,10 +9,14 @@
 @using (Html.BeginForm("AddDepartment", "Admin", FormMethod.Post))
 {
     <div class="form">
+        @if(ViewBag.Message!=null)
+        {
+            @ViewBag.Message
+        }
         <div>
             @Html.LabelFor(Model => Model.DepartmentName, new {@class="Department-label"})
-            @Html.TextBoxFor(Model => Model.DepartmentName,new { @class = "Department-textbox" })
-            @Html.ValidationMessageFor(Model => Model.DepartmentName, "")
+            @Html.TextBoxFor(Model => Model.DepartmentName,new {required="required",autocomplete="off", maxlength = 15, placeholder="Enter Department Name", @class = "Department-textbox" })
+            @Html.ValidationMessageFor(Model => Model.DepartmentName, "", new { @class = "ValidUserName" })
         </div>
             @Html.AntiForgeryToken()
             <input type="submit" class="submit-EditEmployee" />

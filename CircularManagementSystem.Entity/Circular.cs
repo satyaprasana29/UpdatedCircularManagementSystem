@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CircularManagementSystem.Entity
 {
@@ -8,9 +9,8 @@ namespace CircularManagementSystem.Entity
         public int CircularId { get; set; }
         [Required]
         public string CircularName { get; set; }
-        //[Required]
-        //public string Message { get; set; }
         [Required]
         public string FilePath { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

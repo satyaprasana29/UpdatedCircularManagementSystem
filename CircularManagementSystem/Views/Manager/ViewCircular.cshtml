@@ -4,26 +4,19 @@
     ViewBag.Title = "ViewCircular";
 }
 
-<h2>ViewCircular</h2>
 
-@foreach (CircularManagementSystem.Entity.Circular circular in Model)
-{
-    <table>
-        <tr>
-            <td>
-                Circular Name
-            </td>
-            <td>
-                @circular.CircularName
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Circular Message
-            </td>
-            <td>
-                @circular.Message
-            </td>
-        </tr>
-    </table>
-}
+<div class="container-AddCircular">
+    <div>
+        <div>
+            FileName    Link
+        </div>
+        <div>
+            @foreach (CircularManagementSystem.Entity.Circular circulars in @Model)
+            {
+                <div>
+                    @circulars.CircularName   @Html.ActionLink(circulars.CircularName, "DownloadFile", new { id = circulars.CircularId })
+                </div>
+            }
+        </div>
+    </div>
+</div>

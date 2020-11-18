@@ -10,6 +10,7 @@ namespace CircularManagementSystem.BL
         IEnumerable<Department> GetDepartment();
         Department GetOneDepartment(int departmentId);
         void DeleteDepartment(Department department);
+        bool CheckDepartment(string departmentName);
     }
     public class DepartmentBL:IDepartmentBL
     {
@@ -30,5 +31,6 @@ namespace CircularManagementSystem.BL
         {
             repository.DeleteDepartment(department);
         }
+        public bool CheckDepartment(string departmentName) => repository.CheckDepartment(departmentName);
     }
 }

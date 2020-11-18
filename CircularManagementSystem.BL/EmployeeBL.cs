@@ -17,6 +17,7 @@ namespace CircularManagementSystem.BL
         void DeleteEmployee(Employee employee);
         void EditEmployee(Employee employee);
         int GetEmployeeId(string EmployeeEmail);
+        bool CheckEmployee(string employeeEmail, long phoneNumber);
     }
     public enum EmployeeRole
     {
@@ -87,6 +88,10 @@ namespace CircularManagementSystem.BL
         public void EditEmployee(Employee employee)
         {
             repository.EditEmployee(employee);
+        }
+        public bool CheckEmployee(string employeeEmail,long phoneNumber)
+        {
+            return repository.CheckEmployee(employeeEmail, phoneNumber);
         }
     }
 }

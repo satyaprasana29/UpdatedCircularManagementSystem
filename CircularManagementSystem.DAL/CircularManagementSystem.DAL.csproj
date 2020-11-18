@@ -80,6 +80,27 @@
     <Compile Include="ContextClass.cs" />
     <Compile Include="DepartmentRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
+    <Compile Include="Migrations\202006070411114_InitialCreate.cs" />
+    <Compile Include="Migrations\202006070411114_InitialCreate.Designer.cs">
+      <DependentUpon>202006070411114_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010220624367_22-10-2020.cs" />
+    <Compile Include="Migrations\202010220624367_22-10-2020.designer.cs">
+      <DependentUpon>202010220624367_22-10-2020.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011050658043_Manytomanyrelation.cs" />
+    <Compile Include="Migrations\202011050658043_Manytomanyrelation.designer.cs">
+      <DependentUpon>202011050658043_Manytomanyrelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011050904070_manytomany.cs" />
+    <Compile Include="Migrations\202011050904070_manytomany.designer.cs">
+      <DependentUpon>202011050904070_manytomany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011051125129_Ilist.cs" />
+    <Compile Include="Migrations\202011051125129_Ilist.designer.cs">
+      <DependentUpon>202011051125129_Ilist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +112,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006070411114_InitialCreate.resx">
+      <DependentUpon>202006070411114_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010220624367_22-10-2020.resx">
+      <DependentUpon>202010220624367_22-10-2020.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011050658043_Manytomanyrelation.resx">
+      <DependentUpon>202011050658043_Manytomanyrelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011050904070_manytomany.resx">
+      <DependentUpon>202011050904070_manytomany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011051125129_Ilist.resx">
+      <DependentUpon>202011051125129_Ilist.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

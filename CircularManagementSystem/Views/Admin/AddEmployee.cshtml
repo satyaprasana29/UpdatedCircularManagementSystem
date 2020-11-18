@@ -1,5 +1,4 @@
 ﻿@model CircularManagementSystem.Models.EmployeeModel
-
 @{
     ViewBag.Title = "AddEmployee";
 }
@@ -10,15 +9,19 @@
 @using(Html.BeginForm("AddEmployee","Admin",FormMethod.Post))
 {
 <div class="form">
+    @if(ViewBag.Message!=null)
+    {
+        @ViewBag.Message
+    }
     <div>
             @Html.LabelFor(model => model.EmployeeName,new { @class = "AddEmployee-label" })
             @Html.TextBoxFor(model => model.EmployeeName,new { @class = "AddEmployee-textboxName" })
-            @Html.ValidationMessageFor(model => model.EmployeeName)
+            @Html.ValidationMessageFor(model => model.EmployeeName,"", new { @class = "ValidUserName" })
     </div>
     <div>
             @Html.LabelFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-label" })
             @Html.TextBoxFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-textboxPhone" })
-            @Html.ValidationMessageFor(model => model.EmployeePhoneNumber)
+            @Html.ValidationMessageFor(model => model.EmployeePhoneNumber,"", new { @class = "ValidUserName" })
     </div>
     <div>
             @Html.LabelFor(model => model.EmployeeGender,new { @class = "AddEmployee-label" })
@@ -26,31 +29,34 @@
             @Html.Label("Male", new { @class = "AddEmployee-radiolabelMale" })
             @Html.RadioButtonFor(Model => Model.EmployeeGender, "Female", new { @class = "AddEmployee-radioFemale" })
             @Html.Label("Female", new { @class = "AddEmployee-radiolabelFemale" })
-            @Html.ValidationMessageFor(model => model.EmployeeGender)
+            @Html.ValidationMessageFor(model => model.EmployeeGender,"", new { @class = "ValidUserName" })
         </div>
     <div>
             @Html.LabelFor(model => model.EmployeeEmail,new { @class = "AddEmployee-label" })
             @Html.TextBoxFor(model => model.EmployeeEmail,new { @class = "AddEmployee-textboxEmail" })
-            @Html.ValidationMessageFor(model => model.EmployeeEmail)
+            @Html.ValidationMessageFor(model => model.EmployeeEmail,"", new { @class = "ValidUserName" })
             </div>
     <div>
             @Html.LabelFor(model => model.Department,new { @class = "AddEmployee-label" })
             @Html.DropDownListFor(model => model.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.Department, "Select Department",new { @class = "AddEmployee-textboxDepartment" })
-            @Html.ValidationMessageFor(model => model.Department)
+            @Html.ValidationMessageFor(model => model.DepartmentId,"", new { @class = "ValidUserName" })
         </div>
     <div>
             @Html.LabelFor(model => model.EmployeeDesignation,new { @class = "AddEmployee-label" })
             @Html.DropDownListFor(model => model.DesignationId, (IEnumerable<SelectListItem>)ViewBag.Designation, "Select Designation",new { @class = "AddEmployee-textboxDesignation" })
+            @Html.ValidationMessageFor(model=>model.DesignationId,"", new { @class = "ValidUserName" })
     </div>
     <div>
             @Html.LabelFor(model => model.Manager,new { @class = "AddEmployee-label" })
             @Html.DropDownListFor(model => model.ManagerId, (IEnumerable<SelectListItem>)ViewBag.Manager, "Select Manager",new { @class = "AddEmployee-textboxManager" })
-        </div>
+            @Html.ValidationMessageFor(model=>model.ManagerId,"", new { @class = "ValidUserName" })
+    </div>
     <div>
             @Html.AntiForgeryToken()
             <input type="reset" class="reset-AddEmployee"/>
             <input type="submit" class="submit-AddEmployee"/>
         </div>
+    
 </div>
 }
 </div>

@@ -8,5 +8,6 @@ namespace CircularManagementSystem.Entity
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
         public ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Circular> Circulars { get; set; }
     }
 }

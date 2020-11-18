@@ -107,7 +107,9 @@
     <Content Include="CSS\Styles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Aspire-Systems.jpg" />
     <Content Include="Images\Aspire_System_logo.png" />
+    <Content Include="Images\Aspire-Index-images.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -129,6 +131,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\CheckDepartmentModel.cs" />
+    <Compile Include="Models\CircularModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,13 +158,13 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Admin\ViewEmployee.cshtml" />
     <Content Include="Views\Admin\DeleteEmployee.cshtml" />
-    <Content Include="Views\Manager\AddCircular.cshtml" />
     <Content Include="Views\User\ViewCircular.cshtml" />
     <Content Include="Views\Manager\ViewCircular.cshtml" />
     <Content Include="Views\Admin\EditEmployee.cshtml" />
     <Content Include="Views\Admin\AddDepartment.cshtml" />
     <Content Include="Views\Admin\ViewDepartment.cshtml" />
     <Content Include="Views\Admin\DeleteDepartment.cshtml" />
+    <Content Include="Views\Manager\AddCircular.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -170,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Circular\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CircularManagementSystem.BL\CircularManagementSystem.BL.csproj">

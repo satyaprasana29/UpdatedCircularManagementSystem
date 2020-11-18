@@ -1,30 +1,47 @@
-﻿@model CircularManagementSystem.Entity.Circular
-
+﻿@model CircularManagementSystem.Models.CircularModel
 @{
     ViewBag.Title = "AddCircular";
 }
 
 <h2>AddCircular</h2>
-@using(Html.BeginForm("AddCircular","Manager",FormMethod.Post))
+@using(Html.BeginForm("AddCircular","Manager",FormMethod.Post,new { enctype="multipart/form-data"}))
 {
-    <table>
-        <tr>
-            <td>
-                @Html.LabelFor(Model=>Model.CircularName)
-            </td>
-            <td>
-                @Html.EditorFor(Model=>Model.CircularName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button >Choose file</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="AddCircular" />
-            </td>
-        </tr>
-    </table>
+    <div class="container-AddCircular">
+        <div class="circularName">
+            @Html.LabelFor(Model => Model.CircularName)
+            @Html.EditorFor(Model => Model.CircularName,new {required="required" })
+            @Html.ValidationMessageFor(model=>model.CircularName)
+        </div>         
+        <div >
+            File Path
+            <input type="file" name="CircularFile" accept="application/pdf" data-val-required="Pdf File required" data-val="true"/>
+            @Html.ValidationMessageFor(model=>model.CircularFile)
+        </div>    
+        <div class="listOfDepartments">
+            @*@foreach(CircularManagementSystem.Entity.Department department in ViewBag.Department)
+            {
+                @Html.CheckBox(@department.DepartmentName,false,department.DepartmentName)
+                @Html.Label(department.DepartmentName)<br />
+                @Html.Hidden(department.DepartmentId.ToString())
+            }*@
+            @foreach(var choice in Model.Departments)
+            {
+                <ul>
+                    <li>
+                        <input id="choice@(choice.DepartmentId)"
+                               type="checkbox"
+                               name="SelectedChoices"
+                               value="@choice.DepartmentId"
+                               @(Model.SelectedChoices.Contains(choice.DepartmentId)?"checked":"")/>
+                        <label for="operator@(choice.DepartmentId)">@choice.DepartmentName</label>
+                    </li>
+                </ul>
+            }
+        </div>
+                <div><input type="submit" value="AddCircular" /></div>
+        @if(TempData["Message"]!=null)
+        {
+            @TempData["Message"]
+        }
+    </div>
 }

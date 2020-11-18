@@ -8,6 +8,7 @@ namespace CircularManagementSystem.BL
     {
         void AddCircular(Circular circular);
         List<Circular> ViewCircular();
+        Circular GetCircular(int circularId);
     }
     public class CircularBL:ICircularBL
     {
@@ -20,6 +21,11 @@ namespace CircularManagementSystem.BL
         {
             CircularRepository circularRepository = new CircularRepository();
             return circularRepository.GetCirculars();
+        }
+        public Circular GetCircular(int circularId)
+        {
+            CircularRepository circularRepository = new CircularRepository();
+            return circularRepository.GetCircular(circularId);
         }
     }
 }

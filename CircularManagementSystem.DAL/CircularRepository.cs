@@ -18,5 +18,10 @@ namespace CircularManagementSystem.DAL
             using (ContextClass contextClass = new ContextClass())
                 return contextClass.Circulars.ToList();
         }
+        public Circular GetCircular(int circularId)
+        {
+            using (ContextClass contextClass = new ContextClass())
+                return contextClass.Circulars.Where(x => x.CircularId == circularId).SingleOrDefault();
+        }
     }
 }

@@ -14,5 +14,17 @@ namespace CircularManagementSystem.DAL
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Circular> Circulars { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Department>()                       
+                .HasMany(x=>x.Circulars)
+                .WithMany(x=>x.Departments).Map(x=>
+                {
+                    x.ToTable("CircularDepartments");
+                    x.MapLeftKey("CircularId");
+                    x.MapRightKey("DepartmentId");
+                });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

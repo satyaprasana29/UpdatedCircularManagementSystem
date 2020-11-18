@@ -37,6 +37,18 @@ namespace CircularManagementSystem.DAL
                 return department;
             }
         }
+        public bool CheckDepartment(string departmentName)
+        {
+            using(ContextClass contextClass=new ContextClass())
+            {
+                Department department= contextClass.departments.Where(id => id.DepartmentName.ToLower() == departmentName).SingleOrDefault();
+                if(department!=null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
     }
     
 }

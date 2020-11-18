@@ -64,9 +64,13 @@
     text-align: center;
     border-radius: 3%;
 }
+.ValidUserName{
+    display:block;
+    margin-left:40%;
+}
 /*View Employee*/
-.Menu{
-    padding-left:5%; 
+.Menu {
+    padding-left: 5%;
 }
 .ul {
     list-style-type: none;
@@ -240,4 +244,13 @@
 }
 .submit-DeleteEmployee:hover{
     background-color:red;
+}
+.container-AddCircular {
+    margin-left: 50%;
+}
+/*Index PAge*/
+.Index-image{
+    margin-left:30%;
+    width:55%;
+    height:auto;
 }
