@@ -20,11 +20,10 @@ namespace CircularManagementSystem.DAL
                 .HasMany(x=>x.Circulars)
                 .WithMany(x=>x.Departments).Map(x=>
                 {
-                    x.ToTable("CircularDepartments");
-                    x.MapLeftKey("CircularId");
-                    x.MapRightKey("DepartmentId");
+                    x.MapLeftKey("DepartmentId");
+                    x.MapRightKey("CircularId");
+                    x.ToTable("DepartmentCirculars");
                 });
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

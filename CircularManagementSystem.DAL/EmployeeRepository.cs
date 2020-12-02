@@ -27,25 +27,7 @@ namespace CircularManagementSystem.DAL
         {
             using (ContextClass contextClass = new ContextClass())
             {
-                //using(var transaction=contextClass.Database.BeginTransaction())
-                //{
-                //    try
-                //    {
-                //        SqlParameter EmployeeName = new SqlParameter("@EmployeeName", employee.EmployeeName);
-                //        SqlParameter EmployeePhoneNumber = new SqlParameter("@EmployeePhoneNumber", employee.EmployeePhoneNumber);
-                //        SqlParameter EmployeeGender = new SqlParameter("@EmployeeGender", employee.EmployeeGender);
-                //        SqlParameter EmployeeEmail = new SqlParameter("@EmployeeEmail", employee.EmployeeEmail);
-                //        SqlParameter DepartmentId = new SqlParameter("@DepartmentId", employee.DepartmentId);
-                //        SqlParameter DesignationId = new SqlParameter("@DesignationId", employee.DesignationId);
-                //        SqlParameter ManagerId = new SqlParameter("@ManagerId", employee.ManagerId);
-                //        var result = contextClass.Database.ExecuteSqlCommand("[dbo].[Employee_Insert] @EmployeeName, @EmployeePhoneNumber, @EmployeeEmail, @ManagerId, @DesignationId, @EmployeeGender, @DepartmentId", EmployeeName, EmployeePhoneNumber, EmployeeEmail, ManagerId, DesignationId, EmployeeGender, DepartmentId);
-                //        transaction.Commit();
-                //    }
-                //    catch(System.Exception)
-                //    {
-                //        transaction.Rollback();
-                //    }
-                //}
+                
                 contextClass.Employees.Add(employee);
                 contextClass.SaveChanges();
             }
@@ -83,11 +65,7 @@ namespace CircularManagementSystem.DAL
             using(ContextClass contextClass = new ContextClass())
             {
                 SqlParameter EmployeeId = new SqlParameter("@EmployeeId", employee.EmployeeId);
-                var result = contextClass.Database.ExecuteSqlCommand("Employee_Delete @EmployeeId", EmployeeId);
-                //Employee employeeDetail = contextClass.Employees.Where(id => id.EmployeeId == employee.EmployeeId).SingleOrDefault();
-                //contextClass.Employees.Attach(employeeDetail);
-                //contextClass.Employees.Remove(employeeDetail);
-                //contextClass.SaveChanges();
+                contextClass.Database.ExecuteSqlCommand("Employee_Delete @EmployeeId", EmployeeId);
             }
         }
         public bool CheckEmployee(string employeeEmail,long phoneNumber)

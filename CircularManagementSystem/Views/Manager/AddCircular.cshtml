@@ -18,12 +18,6 @@
             @Html.ValidationMessageFor(model=>model.CircularFile)
         </div>    
         <div class="listOfDepartments">
-            @*@foreach(CircularManagementSystem.Entity.Department department in ViewBag.Department)
-            {
-                @Html.CheckBox(@department.DepartmentName,false,department.DepartmentName)
-                @Html.Label(department.DepartmentName)<br />
-                @Html.Hidden(department.DepartmentId.ToString())
-            }*@
             @foreach(var choice in Model.Departments)
             {
                 <ul>

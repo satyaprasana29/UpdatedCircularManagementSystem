@@ -30,7 +30,6 @@ namespace CircularManagementSystem.Controllers
             Circular circular = circularBL.GetCircular(id);
             string path = circular.FilePath;
             return File("~/Circular/"+path, "text/plain", circular.CircularName);
-            //return File(circular.FilePath, System.Net.Mime.MediaTypeNames.Application.Octet);
         }
     }
 }

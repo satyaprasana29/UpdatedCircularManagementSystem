@@ -5,7 +5,6 @@ namespace CircularManagementSystem.Entity
 {
     public class Circular
     {
-        [Key]
         public int CircularId { get; set; }
         [Required]
         public string CircularName { get; set; }

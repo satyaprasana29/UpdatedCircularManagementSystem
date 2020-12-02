@@ -24,23 +24,11 @@ namespace CircularManagementSystem.Controllers
             circularModel.Departments = departmentBL.GetDepartment().ToList();
             circularModel.SelectedChoices = new List<int>();
             return View(circularModel);
-            //CollectionVM collectionVM = new CollectionVM();
-            //List<Department> choiceList = new List<Department>();
-            //choiceList = departmentBL.GetDepartment().ToList();
-            //collectionVM.checkDepartments = choiceList;
-            //return View();
         }
         [HttpPost]
         [Authorize(Roles ="Manager")]
         public ActionResult AddCircular(CircularModel circular)     //Add circular post method
         {
-            IDepartmentBL departmentBL = new DepartmentBL();
-            List<Department> depart = new List<Department>();
-            for(int i=0;i<circular.SelectedChoices.Count;i++)
-            {
-                 depart.Add(departmentBL.GetOneDepartment(circular.SelectedChoices[i]));
-            }
-            circular.Departments = depart;
             string filename = Path.GetFileNameWithoutExtension(circular.CircularFile.FileName);
             string extension = Path.GetExtension(circular.CircularFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssff") + extension;
@@ -49,15 +37,17 @@ namespace CircularManagementSystem.Controllers
             {
                 Circular addCircular = AutoMapper.Mapper.Map<CircularModel, Circular>(circular);
                 filename = Path.Combine(Server.MapPath("~/Circular/"), filename);
-                circular.CircularFile.SaveAs(filename);
                 ICircularBL circularBL = new CircularBL();
+                circular.CircularFile.SaveAs(filename);
                 circularBL.AddCircular(addCircular);
-                TempData["Message"] = "Added Successfully";
-                return View(circular);
+                int circularId = circularBL.GetCircularId(circular.FilePath);
+                if(circularBL.AddCircularDepartments(circular.SelectedChoices, circularId))
+                {
+                    TempData["Message"] = "Added Successfully";
+                    return View(circular);
+                }
             }
-
                 return RedirectToAction("ViewCircular");
-
             }
         [Authorize(Roles = "Manager")]          //View circular Method
         public ActionResult ViewCircular()      //VIew circular uploaded by manager
