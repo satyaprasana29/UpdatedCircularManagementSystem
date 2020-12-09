@@ -15,12 +15,12 @@
     }
     <div>
             @Html.LabelFor(model => model.EmployeeName,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeeName,new { @class = "AddEmployee-textboxName" })
+            @Html.TextBoxFor(model => model.EmployeeName,new { placeholder="Enter the Employee name..",autocomplete = "off", maxlength = 30, @class = "AddEmployee-textboxName"  })
             @Html.ValidationMessageFor(model => model.EmployeeName,"", new { @class = "ValidUserName" })
     </div>
     <div>
             @Html.LabelFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-textboxPhone" })
+            @Html.TextBoxFor(model => model.EmployeePhoneNumber,new {placeholder="Enter the Phone number..", autocomplete = "off", maxlength = 10,@class = "AddEmployee-textboxPhone" })
             @Html.ValidationMessageFor(model => model.EmployeePhoneNumber,"", new { @class = "ValidUserName" })
     </div>
     <div>
@@ -33,7 +33,7 @@
         </div>
     <div>
             @Html.LabelFor(model => model.EmployeeEmail,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeeEmail,new { @class = "AddEmployee-textboxEmail" })
+            @Html.TextBoxFor(model => model.EmployeeEmail,new {placeholder="Enter the email address..", autocomplete = "off", maxlength = 30, @class = "AddEmployee-textboxEmail"})
             @Html.ValidationMessageFor(model => model.EmployeeEmail,"", new { @class = "ValidUserName" })
             </div>
     <div>

@@ -23,8 +23,8 @@ namespace CircularManagementSystem.Controllers
         IEmployeeBL employeeBL;
         public AdminController()                    //Constructor of Admin Controller
         {
-            employeeBL = new EmployeeBL();
             departmentBL = new DepartmentBL();
+            employeeBL = new EmployeeBL();
         }
         // GET: Admin
         [HttpGet]
@@ -38,14 +38,15 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AddDepartment(DepartmentModel departmentModel)      //Post method of Adding Department
         {
-            bool result = departmentBL.CheckDepartment(departmentModel.DepartmentName.ToLower());
-                if (ModelState.IsValid&&result==false)
+            bool check = false;
+            bool result = this.departmentBL.CheckDepartment(departmentModel.DepartmentName.ToLower());
+                if (ModelState.IsValid&&result==check)
                 {
                     Department department = new Department();
                     department.DepartmentName = departmentModel.DepartmentName;
                     departmentBL.AddDepartment(department);
                 }
-                else if(result==true)
+                else if(result!=check)
                 {
                     ViewBag.Message = "Department Name already exist";
                 }
@@ -89,22 +90,22 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AddEmployee(EmployeeModel employeeModel)        //Add Employee Post method
         {
-           
+            bool check = false;
                 ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
                 ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
                 ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
                 bool result = employeeBL.CheckEmployee(employeeModel.EmployeeEmail, employeeModel.EmployeePhoneNumber);
                 
-                if (ModelState.IsValid&&result==false)
+                if (ModelState.IsValid&&result==check)
                 {
                     var employeeMap = AutoMapper.Mapper.Map<EmployeeModel, Employee>(employeeModel);
                     employeeBL.AddEmployee(employeeMap);
                     AddAccount(employeeModel);
                     return RedirectToAction("ViewEmployee", "Admin");
                 }
-                else if(result==true)
+                else if(result!=check)
                 {
-                ViewBag.Message = "EmployeeEMail or Phone Number already exist";
+                ViewBag.Message = "Employee already exist";
                 }
                 return View();
             
@@ -122,7 +123,7 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ViewEmployee()      //View Employee Details
         {
-                List<Employee> employees = employeeBL.GetEmployees();
+                List<Employee> employees = this.employeeBL.GetEmployees();
                 return View(employees);
         }
         [HttpGet]

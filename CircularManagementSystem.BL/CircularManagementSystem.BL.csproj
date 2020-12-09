@@ -58,6 +58,7 @@
     <Compile Include="CircularBL.cs" />
     <Compile Include="DepartmentBL.cs" />
     <Compile Include="EmployeeBL.cs" />
+    <Compile Include="IEmployeeBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

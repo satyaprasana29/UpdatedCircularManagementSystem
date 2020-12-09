@@ -72,8 +72,9 @@ namespace CircularManagementSystem.DAL
         {
             using(ContextClass contextClass=new ContextClass())
             {
-                Employee employee= contextClass.Employees.Where(x => x.EmployeeEmail == employeeEmail).Where(y => y.EmployeePhoneNumber == phoneNumber).SingleOrDefault();
-                if(employee!=null)
+                Employee employeeCheckMail= contextClass.Employees.Where(x => x.EmployeeEmail == employeeEmail).SingleOrDefault();
+                Employee employeeCheckPhone = contextClass.Employees.Where(x => x.EmployeePhoneNumber == phoneNumber).SingleOrDefault();
+                if(employeeCheckMail!=null||employeeCheckPhone!=null)
                 {
                     return true;
                 }
@@ -107,16 +108,7 @@ namespace CircularManagementSystem.DAL
         public void EditEmployee(Employee employee)
         {
             using(ContextClass contextClass = new ContextClass())
-            {
-                //SqlParameter EmployeeId = new SqlParameter("@EmployeeId", employee.EmployeeId);
-                //SqlParameter EmployeeName = new SqlParameter("@EmployeeName", employee.EmployeeName);
-                //SqlParameter EmployeePhoneNumber = new SqlParameter("@EmployeePhoneNumber", employee.EmployeePhoneNumber);
-                //SqlParameter EmployeeGender = new SqlParameter("@EmployeeGender", employee.EmployeeGender);
-                ////SqlParameter EmployeeEmail = new SqlParameter("@EmployeeEmail", employee.EmployeeEmail);
-                //SqlParameter DepartmentId = new SqlParameter("@DepartmentId", employee.DepartmentId);
-                //SqlParameter DesignationId = new SqlParameter("@DesignationId", employee.DesignationId);
-                //SqlParameter ManagerId = new SqlParameter("@ManagerId", employee.ManagerId);
-                //var result = contextClass.Database.ExecuteSqlCommand("Employee_Update @EmployeeId,@EmployeeName, @EmployeePhoneNumber, @ManagerId, @DesignationId, @EmployeeGender, @DepartmentId", EmployeeId, EmployeeName, EmployeePhoneNumber, ManagerId, DesignationId, EmployeeGender, DepartmentId);
+            { 
                 contextClass.Entry(employee).State = System.Data.Entity.EntityState.Modified;
                 contextClass.SaveChanges();
             }

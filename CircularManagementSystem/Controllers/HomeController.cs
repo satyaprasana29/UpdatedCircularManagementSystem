@@ -15,6 +15,7 @@ namespace CircularManagementSystem.Controllers
     /// </summary>
     public class HomeController : Controller
     {
+        
         // GET: Index
         public ActionResult Index()     //Home page of Controller
         {
@@ -29,8 +30,6 @@ namespace CircularManagementSystem.Controllers
         [HttpPost]
         public ActionResult Login(AccountModel accountModel)        //Login post method
         {
-            //try
-            {
                 IEmployeeBL employeeBL = new EmployeeBL();
                 if (ModelState.IsValid)
                 {
@@ -61,21 +60,12 @@ namespace CircularManagementSystem.Controllers
                         ViewBag.Message = "User id or password is wrong";
                     }
                 }
-                return View();
-            }
-            //catch (Exception)
-            //{
-            //    return RedirectToAction("Error", "Home");
-            //}
+            return View();
         }
         public ActionResult LogOff()            //Log Out Function
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        //public ActionResult Error()
-        //{
-        //    return View();
-        ////}
     }
 }

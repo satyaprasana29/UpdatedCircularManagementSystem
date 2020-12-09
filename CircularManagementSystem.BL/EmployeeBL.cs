@@ -3,31 +3,35 @@ using CircularManagementSystem.DAL;
 using System.Collections.Generic;
 namespace CircularManagementSystem.BL
 {
-    public interface IEmployeeBL
-    {
-        IEnumerable<EmployeeDesignation> GetDesignations();
-        IEnumerable<Manager> GetManagers();
-        string GetPassword(string employeeName, string employeePhoneNumber);
-        void AddEmployee(Employee employee);
-        void AddAccount(Account account);
-        Account Login(string username, string password);
-        string ChooseRole(int managerId);
-        List<Employee> GetEmployees();
-        Employee GetEmployee(int employeeId);
-        void DeleteEmployee(Employee employee);
-        void EditEmployee(Employee employee);
-        int GetEmployeeId(string EmployeeEmail);
-        bool CheckEmployee(string employeeEmail, long phoneNumber);
-    }
+    //public interface IEmployeeBL
+    //{
+    //    IEnumerable<EmployeeDesignation> GetDesignations();
+    //    IEnumerable<Manager> GetManagers();
+    //    string GetPassword(string employeeName, string employeePhoneNumber);
+    //    void AddEmployee(Employee employee);
+    //    void AddAccount(Account account);
+    //    Account Login(string username, string password);
+    //    string ChooseRole(int managerId);
+    //    List<Employee> GetEmployees();
+    //    Employee GetEmployee(int employeeId);
+    //    void DeleteEmployee(Employee employee);
+    //    void EditEmployee(Employee employee);
+    //    int GetEmployeeId(string EmployeeEmail);
+    //    bool CheckEmployee(string employeeEmail, long phoneNumber);
+    //}
     public enum EmployeeRole
     {
         Admin,
         Manager,
         User
     }
-    public class EmployeeBL:IEmployeeBL
+    public class EmployeeBL : IEmployeeBL
     {
-        EmployeeRepository repository = new EmployeeRepository();
+        EmployeeRepository repository;
+        public EmployeeBL()
+        {
+            repository = new EmployeeRepository();
+        }
         public IEnumerable<EmployeeDesignation> GetDesignations()
         {
             return repository.GetEmployeeDesignations();
@@ -36,9 +40,9 @@ namespace CircularManagementSystem.BL
         {
             return repository.GetManager();
         }
-        public string GetPassword(string employeeName,string employeePhoneNumber)
+        public string GetPassword(string employeeName, string employeePhoneNumber)
         {
-            return employeeName.Substring(0, 1) + employeePhoneNumber.Substring(0, 1) + employeeName.Substring(employeeName.Length - 1, 1)+ employeePhoneNumber.Substring(employeePhoneNumber.Length - 1, 1);
+            return employeeName.Substring(0, 1) + employeePhoneNumber.Substring(0, 1) + employeeName.Substring(employeeName.Length - 1, 1) + employeePhoneNumber.Substring(employeePhoneNumber.Length - 1, 1);
         }
         public void AddEmployee(Employee employee)
         {
@@ -55,15 +59,15 @@ namespace CircularManagementSystem.BL
         public string ChooseRole(int managerId)
         {
             string managerName = repository.GetRole(managerId);
-            if(managerName== "CEO")
+            if (managerName == "CEO")
             {
                 return EmployeeRole.Manager.ToString();
             }
-            else if(managerName== "Admin Manager")
+            else if (managerName == "Admin Manager")
             {
                 return EmployeeRole.Admin.ToString();
             }
-            else if(managerName!=null)
+            else if (managerName != null)
             {
                 return EmployeeRole.User.ToString();
             }
@@ -89,7 +93,7 @@ namespace CircularManagementSystem.BL
         {
             repository.EditEmployee(employee);
         }
-        public bool CheckEmployee(string employeeEmail,long phoneNumber)
+        public bool CheckEmployee(string employeeEmail, long phoneNumber)
         {
             return repository.CheckEmployee(employeeEmail, phoneNumber);
         }

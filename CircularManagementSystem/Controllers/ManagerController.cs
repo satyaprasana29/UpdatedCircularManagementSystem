@@ -52,7 +52,7 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Manager")]          //View circular Method
         public ActionResult ViewCircular()      //VIew circular uploaded by manager
         {
-            var dir = new System.IO.DirectoryInfo(Server.MapPath("~/Circular/"));
+            //var dir = new System.IO.DirectoryInfo(Server.MapPath("~/Circular/"));
             CircularBL circularBL = new CircularBL();
             List<Circular> circulars = circularBL.ViewCircular();
             return View(circulars);
@@ -63,7 +63,6 @@ namespace CircularManagementSystem.Controllers
             Circular circular = circularBL.GetCircular(id);
             string path = circular.FilePath;
             return File("~/Circular/" + path, "text/plain", circular.CircularName);
-            //return File(circular.FilePath, System.Net.Mime.MediaTypeNames.Application.Octet);
         }
     }
 }
