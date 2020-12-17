@@ -1,19 +1,17 @@
 ﻿@model CircularManagementSystem.Models.EmployeeModel
 
 @{
-    ViewBag.Title = "EditEmployee";
+    ViewBag.Title = "MyProfile";
 }
 
 <div class="EditEmployee-container">
-    <h2 class="title">EditEmployee</h2>
+    <h2 class="title">MyProfile</h2>
     <hr />
-    @using (Html.BeginForm("EditEmployee", "Admin", FormMethod.Post))
-    {
         @Html.HiddenFor(model => model.EmployeeId)
         <div class="form">
             <div>
-                @Html.LabelFor(model => model.EmployeeName, new {@class = "AddEmployee-label" })
-                @Html.TextBoxFor(model => model.EmployeeName, new {placeholder="Enter the name..",maxlength=30, autocomplete="off",@id= "name", @class = "AddEmployee-textboxName" })
+                @Html.LabelFor(model => model.EmployeeName, new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeeName, new { placeholder = "Enter the name..", maxlength = 30, autocomplete = "off", @id = "name", @class = "AddEmployee-textboxName" })
                 <span id="spanValidate"></span>
                 @Html.ValidationMessageFor(model => model.EmployeeName)
             </div>
@@ -46,8 +44,5 @@
                 @Html.LabelFor(model => model.Manager, new { @class = "AddEmployee-label" })
                 @Html.DropDownListFor(model => model.ManagerId, (IEnumerable<SelectListItem>)ViewBag.Manager, "select Manager", new { @class = "AddEmployee-textboxManager" })
             </div>
-            @Html.AntiForgeryToken()
-            <input type="submit" class="submit-EditEmployee" />
         </div>
-    }
 </div>

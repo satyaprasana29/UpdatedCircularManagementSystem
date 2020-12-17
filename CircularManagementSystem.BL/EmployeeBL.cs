@@ -97,5 +97,17 @@ namespace CircularManagementSystem.BL
         {
             return repository.CheckEmployee(employeeEmail, phoneNumber);
         }
+        public Account GetUserDetails(string email)
+        {
+            return repository.GetUserDetails(email);
+        }
+        public bool UpdatePassword(string email,string password)
+        {
+            return repository.UpdatePassword(email,password);
+        }
+        public Employee GetEmployeeDetails(string email)
+        {
+            return repository.GetEmployeeDetails(email);
+        }
     }
 }

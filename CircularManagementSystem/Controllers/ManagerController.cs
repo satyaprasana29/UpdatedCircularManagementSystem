@@ -11,7 +11,7 @@ namespace CircularManagementSystem.Controllers
 {
     /// <summary>
     /// class: Manager Controller
-    /// This class have method for Add Circular,View Circular
+    /// This class have methods for Add Circular,View Circular and DownloadCircular
     /// </summary>
     [Authorize(Roles ="Manager")]
     public class ManagerController : Controller
@@ -44,7 +44,7 @@ namespace CircularManagementSystem.Controllers
                 if(circularBL.AddCircularDepartments(circular.SelectedChoices, circularId))
                 {
                     TempData["Message"] = "Added Successfully";
-                    return View(circular);
+                    return RedirectToAction("ViewCircular");
                 }
             }
                 return RedirectToAction("ViewCircular");

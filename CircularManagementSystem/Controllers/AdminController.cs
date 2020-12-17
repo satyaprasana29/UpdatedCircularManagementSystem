@@ -130,14 +130,17 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult EditEmployee(int employeeId)        //Edit employee details get  method
         {
-            
+            if(ModelState.IsValid)
+            {
                 ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
                 ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
                 ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
                 Employee employee = employeeBL.GetEmployee(employeeId);
                 var employeeMap = AutoMapper.Mapper.Map<Employee, EmployeeModel>(employee);
                 return View(employeeMap);
-            
+            }
+
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -169,5 +172,6 @@ namespace CircularManagementSystem.Controllers
                 return RedirectToAction("ViewEmployee");
             
         }
+        
     }
 }

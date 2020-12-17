@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
+using System;
+using System.Data;
+using System.Configuration;
 
 namespace CircularManagementSystem.DAL
 {
@@ -112,6 +115,63 @@ namespace CircularManagementSystem.DAL
                 contextClass.Entry(employee).State = System.Data.Entity.EntityState.Modified;
                 contextClass.SaveChanges();
             }
+        }
+        public Account GetUserDetails(string emailId)
+        {
+            using(ContextClass context=new ContextClass())
+            {
+                Account account=null;
+                try
+                {
+                    account = context.Accounts.Where(x => x.EmployeeEmail == emailId).SingleOrDefault();
+                    return account;
+                }
+                catch(Exception)
+                {
+                    return account;
+                }
+            }
+        }
+        public bool UpdatePassword(string email,string password)
+        {
+            try
+            { 
+                string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                using(SqlConnection connection=new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand("SP_ChangePassword", connection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@EmployeeEmail", email);
+                    sqlCommand.Parameters.AddWithValue("@password", password);
+                    connection.Open();
+                    byte result = (byte)sqlCommand.ExecuteNonQuery();
+                    if(result>=1)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            return false;
+        }
+        public Employee GetEmployeeDetails(string email)
+        {
+                using (ContextClass context = new ContextClass())
+                {
+                    Employee Employee = null;
+                    try
+                    {
+                        Employee = context.Employees.Where(x => x.EmployeeEmail == email).SingleOrDefault();
+                        return Employee;
+                    }
+                    catch (Exception)
+                    {
+                        return Employee;
+                    }
+                }
         }
     }
 }

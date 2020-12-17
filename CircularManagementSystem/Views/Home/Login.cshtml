@@ -12,20 +12,22 @@
     <hr />
     <div class="username-label">
         @Html.LabelFor(model => model.UserName)
-        @Html.TextBoxFor(model => model.UserName, new { placeholder="Enter the username...",maxlength=25,autocomplete="off", @class = "username" })
-        @Html.ValidationMessageFor(model=>model.UserName,"",new { @class="ValidUserName"})
+        @Html.TextBoxFor(model => model.UserName, new { placeholder = "Enter the username...", maxlength = 25, autocomplete = "off", @id = "login_UserName", @class = "username" })
+        <span id="spanValidateloginUserName"></span>
+        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "ValidUserName error" })
     </div>
     <div class="password-label">
         @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password,new { placeholder = "Enter the password...",maxlength=10, @class = "password"} )
-        @Html.ValidationMessageFor(model=>model.Password,"",new { @class= "ValidUserName" })
+        @Html.PasswordFor(model => model.Password, new { placeholder = "Enter the password...", maxlength = 10, @id = "login_Password", @class = "password" })
+        <span id="spanValidateloginPassword"></span>
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "ValidUserName error" })
     </div>
     <button type="reset" class="reset">Reset</button>
     <button type="submit" class="submit">Submit</button>
     <div>
         @if (ViewBag.Message != null)
         {
-            @ViewBag.Message
+        <span class="error">@ViewBag.Message</span>
         }
     </div>
 </div>

@@ -4,16 +4,13 @@ using System.Collections.Generic;
 
 namespace CircularManagementSystem.BL
 {
-    public interface IDepartmentBL
-    {
-        void AddDepartment(Department department);
-        IEnumerable<Department> GetDepartment();
-        Department GetOneDepartment(int departmentId);
-        void DeleteDepartment(Department department);
-        bool CheckDepartment(string departmentName);
-    }
+    
     public class DepartmentBL:IDepartmentBL
     {
+        /// <summary>
+        /// Class: DepartmentBL
+        /// Department 
+        /// </summary>
         DepartmentRepository repository = new DepartmentRepository();
         public void AddDepartment(Department department)
         {

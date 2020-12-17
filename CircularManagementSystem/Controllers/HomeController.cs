@@ -37,7 +37,6 @@ namespace CircularManagementSystem.Controllers
                     if(account!=null)
                     {
                         FormsAuthentication.SetAuthCookie(account.EmployeeEmail, false);
-
                         var authTicket = new FormsAuthenticationTicket(1, account.EmployeeEmail, DateTime.Now, DateTime.Now.AddMinutes(20), false, account.Role);
                         string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                         var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
@@ -66,6 +65,50 @@ namespace CircularManagementSystem.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            IEmployeeBL employeeBL = new EmployeeBL();
+            string user = HttpContext.User.Identity.Name;
+            Account account = employeeBL.GetUserDetails(user);
+            AccountPasswordModel accountPasswordModel = new AccountPasswordModel();
+            accountPasswordModel.Password = account.Password;
+            accountPasswordModel.UserName = account.EmployeeEmail;
+            return View(accountPasswordModel);
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(AccountPasswordModel accountModel)
+        {
+           if(ModelState.IsValid)
+            {
+                IEmployeeBL employeeBL = new EmployeeBL();
+
+                bool result = employeeBL.UpdatePassword(accountModel.UserName, accountModel.Password);
+                if (result)
+                {
+                    ViewBag.Message = "Password Updated";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Message = "Please Try again!";
+                    return View();
+                }
+            }
+            return View();
+        }
+        public ActionResult MyProfile()
+        {
+            IEmployeeBL employeeBL = new EmployeeBL();
+            IDepartmentBL departmentBL = new DepartmentBL();
+            ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
+            ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
+            ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
+            string user = HttpContext.User.Identity.Name;
+            Employee employee = employeeBL.GetEmployeeDetails(user);
+            var employeeMap = AutoMapper.Mapper.Map<Employee, EmployeeModel>(employee);
+            return View(employeeMap);
         }
     }
 }

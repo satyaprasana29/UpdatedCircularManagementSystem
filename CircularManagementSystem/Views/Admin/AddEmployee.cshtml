@@ -2,61 +2,69 @@
 @{
     ViewBag.Title = "AddEmployee";
 }
+
 <div class="AddEmployee-container">
 
-<h2 class="title">AddEmployee</h2>
+    <h2 class="title">AddEmployee</h2>
     <hr />
-@using(Html.BeginForm("AddEmployee","Admin",FormMethod.Post))
-{
-<div class="form">
-    @if(ViewBag.Message!=null)
+    @using (Html.BeginForm("AddEmployee", "Admin", FormMethod.Post))
     {
-        @ViewBag.Message
-    }
-    <div>
-            @Html.LabelFor(model => model.EmployeeName,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeeName,new { placeholder="Enter the Employee name..",autocomplete = "off", maxlength = 30, @class = "AddEmployee-textboxName"  })
-            @Html.ValidationMessageFor(model => model.EmployeeName,"", new { @class = "ValidUserName" })
-    </div>
-    <div>
-            @Html.LabelFor(model => model.EmployeePhoneNumber,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeePhoneNumber,new {placeholder="Enter the Phone number..", autocomplete = "off", maxlength = 10,@class = "AddEmployee-textboxPhone" })
-            @Html.ValidationMessageFor(model => model.EmployeePhoneNumber,"", new { @class = "ValidUserName" })
-    </div>
-    <div>
-            @Html.LabelFor(model => model.EmployeeGender,new { @class = "AddEmployee-label" })
-            @Html.RadioButtonFor(model => model.EmployeeGender, "Male", new { @class = "AddEmployee-radioMale" })
-            @Html.Label("Male", new { @class = "AddEmployee-radiolabelMale" })
-            @Html.RadioButtonFor(Model => Model.EmployeeGender, "Female", new { @class = "AddEmployee-radioFemale" })
-            @Html.Label("Female", new { @class = "AddEmployee-radiolabelFemale" })
-            @Html.ValidationMessageFor(model => model.EmployeeGender,"", new { @class = "ValidUserName" })
-        </div>
-    <div>
-            @Html.LabelFor(model => model.EmployeeEmail,new { @class = "AddEmployee-label" })
-            @Html.TextBoxFor(model => model.EmployeeEmail,new {placeholder="Enter the email address..", autocomplete = "off", maxlength = 30, @class = "AddEmployee-textboxEmail"})
-            @Html.ValidationMessageFor(model => model.EmployeeEmail,"", new { @class = "ValidUserName" })
+        <div class="form">
+            @if (ViewBag.Message != null)
+            {
+                @ViewBag.Message
+            }
+            <div>
+                @Html.LabelFor(model => model.EmployeeName, new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeeName, new { placeholder = "Enter the Employee name..", autocomplete = "off", maxlength = 30, @id = "name", @class = "AddEmployee-textboxName" })
+                <span id="spanValidate"></span>
+                @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "ValidUserName" })
             </div>
-    <div>
-            @Html.LabelFor(model => model.Department,new { @class = "AddEmployee-label" })
-            @Html.DropDownListFor(model => model.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.Department, "Select Department",new { @class = "AddEmployee-textboxDepartment" })
-            @Html.ValidationMessageFor(model => model.DepartmentId,"", new { @class = "ValidUserName" })
+            <div>
+                @Html.LabelFor(model => model.EmployeePhoneNumber, new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeePhoneNumber, new { placeholder = "Enter the Phone number..", autocomplete = "off", maxlength = 10,@id="phoneNumber", @class = "AddEmployee-textboxPhone" })
+                <span id="spanValidatePhone"></span>
+                @Html.ValidationMessageFor(model => model.EmployeePhoneNumber, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.EmployeeGender, new { @class = "AddEmployee-label" })
+                @Html.RadioButtonFor(model => model.EmployeeGender, "Male", new {@name="gender", @class = "AddEmployee-radioMale" })
+                @Html.Label("Male", new { @class = "AddEmployee-radiolabelMale" })
+                @Html.RadioButtonFor(Model => Model.EmployeeGender, "Female", new {@name="gender", @class = "AddEmployee-radioFemale" })
+                @Html.Label("Female", new { @class = "AddEmployee-radiolabelFemale" })
+                <span id="spanValidateGender"></span>
+                @Html.ValidationMessageFor(model => model.EmployeeGender, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.EmployeeEmail, new { @class = "AddEmployee-label" })
+                @Html.TextBoxFor(model => model.EmployeeEmail, new { @id = "email", @class = "AddEmployee-textboxEmail", placeholder = "Enter the email address..", autocomplete = "off", maxlength = 30 })
+                <span id="spanValidateEmail"></span>
+                @Html.ValidationMessageFor(model => model.EmployeeEmail, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Department, new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.Department, "Select Department", new { @class = "AddEmployee-textboxDepartment" })
+                <span id="spanValidateDepartment"></span>
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.EmployeeDesignation, new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.DesignationId, (IEnumerable<SelectListItem>)ViewBag.Designation, "Select Designation", new { @class = "AddEmployee-textboxDesignation" })
+                <span id="spanValidateDesignation"></span>
+                @Html.ValidationMessageFor(model => model.DesignationId, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Manager, new { @class = "AddEmployee-label" })
+                @Html.DropDownListFor(model => model.ManagerId, (IEnumerable<SelectListItem>)ViewBag.Manager, "Select Manager", new { @class = "AddEmployee-textboxManager" })
+                <span id="spanValidateManager"></span>
+                @Html.ValidationMessageFor(model => model.ManagerId, "", new { @class = "ValidUserName" })
+            </div>
+            <div>
+                @Html.AntiForgeryToken()
+                <input type="reset" class="reset-AddEmployee" />
+                <input type="submit" class="submit-AddEmployee" />
+            </div>
+
         </div>
-    <div>
-            @Html.LabelFor(model => model.EmployeeDesignation,new { @class = "AddEmployee-label" })
-            @Html.DropDownListFor(model => model.DesignationId, (IEnumerable<SelectListItem>)ViewBag.Designation, "Select Designation",new { @class = "AddEmployee-textboxDesignation" })
-            @Html.ValidationMessageFor(model=>model.DesignationId,"", new { @class = "ValidUserName" })
-    </div>
-    <div>
-            @Html.LabelFor(model => model.Manager,new { @class = "AddEmployee-label" })
-            @Html.DropDownListFor(model => model.ManagerId, (IEnumerable<SelectListItem>)ViewBag.Manager, "Select Manager",new { @class = "AddEmployee-textboxManager" })
-            @Html.ValidationMessageFor(model=>model.ManagerId,"", new { @class = "ValidUserName" })
-    </div>
-    <div>
-            @Html.AntiForgeryToken()
-            <input type="reset" class="reset-AddEmployee"/>
-            <input type="submit" class="submit-AddEmployee"/>
-        </div>
-    
-</div>
-}
+    }
 </div>

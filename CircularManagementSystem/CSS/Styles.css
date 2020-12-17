@@ -29,6 +29,9 @@
 .username {
     margin-left: 3px;
 }
+.error{
+    color:red;
+}
 .submit {
     background-color: #4CAF50; /* Green */
     border:none;
@@ -66,8 +69,15 @@
 }
 .ValidUserName{
     display:block;
-    margin-left:40%;
+    margin-left:35%;
+    color:red;
 }
+/*.username-label{
+    margin-left: 15%;
+}
+.password-label{
+    margin-left:-6px;
+}*/
 /*View Employee*/
 .Menu {
     padding-left: 5%;
@@ -253,4 +263,15 @@
     margin-left:30%;
     width:55%;
     height:auto;
+}
+#spanValidate, #spanValidatePhone, #spanValidateEmail {
+    color: red;
+    height: 25px;
+    margin-left: 35%;
+}
+#spanValidateloginUserName{
+    color:red;
+}
+#spanValidateloginPassword{
+    color:red;
 }

@@ -18,5 +18,8 @@ namespace CircularManagementSystem.BL
         void EditEmployee(Employee employee);
         int GetEmployeeId(string EmployeeEmail);
         bool CheckEmployee(string employeeEmail, long phoneNumber);
+        Account GetUserDetails(string email);
+        bool UpdatePassword(string email,string password);
+        Employee GetEmployeeDetails(string email);
     }
 }
