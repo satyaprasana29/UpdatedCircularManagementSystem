@@ -13,9 +13,21 @@ namespace CircularManagementSystem.Controllers
     /// In this controller It have Index method for home page.
     /// It have Login method for Logging in application
     /// </summary>
-    public class HomeController : Controller
+    public enum EmployeeRole
     {
-        
+        Admin,
+        Manager,
+        User
+    }
+public class HomeController : Controller
+    {
+        IEmployeeBL employeeBL;
+        IDepartmentBL departmentBL;
+        public HomeController()
+        {
+            employeeBL = new EmployeeBL();
+            departmentBL = new DepartmentBL();
+        }
         // GET: Index
         public ActionResult Index()     //Home page of Controller
         {
@@ -30,7 +42,6 @@ namespace CircularManagementSystem.Controllers
         [HttpPost]
         public ActionResult Login(AccountModel accountModel)        //Login post method
         {
-                IEmployeeBL employeeBL = new EmployeeBL();
                 if (ModelState.IsValid)
                 {
                     Account account = employeeBL.Login(accountModel.UserName, accountModel.Password);
@@ -41,15 +52,15 @@ namespace CircularManagementSystem.Controllers
                         string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                         var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                         HttpContext.Response.Cookies.Add(authCookie);
-                        if (account.Role == "Admin")
+                        if (account.Role == EmployeeRole.Admin.ToString())
                         {
                             return RedirectToAction("Index", "Home");
                         }
-                        else if (account.Role == "Manager")
+                        else if (account.Role == EmployeeRole.Manager.ToString())
                         {
                             return RedirectToAction("Index", "Home");
                         }
-                        else if (account.Role == "User")
+                        else if (account.Role == EmployeeRole.User.ToString())
                         {
                             return RedirectToAction("Index", "Home");
                         }
@@ -69,7 +80,6 @@ namespace CircularManagementSystem.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            IEmployeeBL employeeBL = new EmployeeBL();
             string user = HttpContext.User.Identity.Name;
             Account account = employeeBL.GetUserDetails(user);
             AccountPasswordModel accountPasswordModel = new AccountPasswordModel();
@@ -82,8 +92,6 @@ namespace CircularManagementSystem.Controllers
         {
            if(ModelState.IsValid)
             {
-                IEmployeeBL employeeBL = new EmployeeBL();
-
                 bool result = employeeBL.UpdatePassword(accountModel.UserName, accountModel.Password);
                 if (result)
                 {
@@ -100,8 +108,6 @@ namespace CircularManagementSystem.Controllers
         }
         public ActionResult MyProfile()
         {
-            IEmployeeBL employeeBL = new EmployeeBL();
-            IDepartmentBL departmentBL = new DepartmentBL();
             ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
             ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
             ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
@@ -109,6 +115,10 @@ namespace CircularManagementSystem.Controllers
             Employee employee = employeeBL.GetEmployeeDetails(user);
             var employeeMap = AutoMapper.Mapper.Map<Employee, EmployeeModel>(employee);
             return View(employeeMap);
+        }
+        public ActionResult Error()
+        {
+            return View();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CircularManagementSystem.BL
     {
         /// <summary>
         /// Class :CircularBL
-        /// Business layer Circular class inherites the Interface ICircularBL
+        /// Circular class Business layer inherites the Interface ICircularBL
         /// This class is used to connect with repository layer
         /// This class has methods to Add Circular, Download Circular and View Circulars
         /// </summary>

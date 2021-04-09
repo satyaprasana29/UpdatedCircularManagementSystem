@@ -1,3 +1,4 @@
+using CircularManagementSystem.App_Start;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +14,7 @@ namespace CircularManagementSystem
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapping.MapValues();
+            UnityConfig.RegisterComponents();
         }
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {

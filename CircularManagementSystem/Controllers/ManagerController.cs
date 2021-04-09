@@ -14,12 +14,18 @@ namespace CircularManagementSystem.Controllers
     /// This class have methods for Add Circular,View Circular and DownloadCircular
     /// </summary>
     [Authorize(Roles ="Manager")]
+    [ExceptionHandler]
+    //[HandleError]
     public class ManagerController : Controller
     {
+        IDepartmentBL departmentBL;
+        public ManagerController()
+        {
+            departmentBL = new DepartmentBL();
+        }
         // GET: Manager
         public ActionResult AddCircular()           //ADD circular to the database get method
         {
-            IDepartmentBL departmentBL = new DepartmentBL();
             CircularModel circularModel = new CircularModel();
             circularModel.Departments = departmentBL.GetDepartment().ToList();
             circularModel.SelectedChoices = new List<int>();
@@ -49,10 +55,9 @@ namespace CircularManagementSystem.Controllers
             }
                 return RedirectToAction("ViewCircular");
             }
-        [Authorize(Roles = "Manager")]          //View circular Method
+        [Authorize(Roles = "Manager")]          
         public ActionResult ViewCircular()      //VIew circular uploaded by manager
         {
-            //var dir = new System.IO.DirectoryInfo(Server.MapPath("~/Circular/"));
             CircularBL circularBL = new CircularBL();
             List<Circular> circulars = circularBL.ViewCircular();
             return View(circulars);

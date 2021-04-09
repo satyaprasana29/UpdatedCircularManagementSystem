@@ -17,14 +17,16 @@ namespace CircularManagementSystem.Controllers
     /// It also have functions for Add,View,Delete and Edit Employee
     /// </summary>
     [Authorize(Roles ="Admin")]
+    [ExceptionHandler]
     public class AdminController : Controller
     {
         IDepartmentBL departmentBL;
         IEmployeeBL employeeBL;
-        public AdminController()                    //Constructor of Admin Controller
+        public AdminController(IDepartmentBL departmentBL,IEmployeeBL employeeBL)                    //Constructor of Admin Controller
         {
-            departmentBL = new DepartmentBL();
-            employeeBL = new EmployeeBL();
+            this.departmentBL = departmentBL;
+            this.employeeBL = employeeBL;
+
         }
         // GET: Admin
         [HttpGet]
@@ -55,7 +57,7 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ViewDepartment()        //View Department Details
         {
-                IEnumerable<Department> departments = departmentBL.GetDepartment();
+                IEnumerable<Department> departments = this.departmentBL.GetDepartment();
                 return View(departments);
             
         }
@@ -63,7 +65,7 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteDepartment(int departmentId)      //Delete Department Details GEt Method
         {
-                Department department = departmentBL.GetOneDepartment(departmentId);
+                Department department = this.departmentBL.GetOneDepartment(departmentId);
                 return View(department);
         }
         
@@ -71,7 +73,7 @@ namespace CircularManagementSystem.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteDepartment(Department department)     //DElete Department Details Post Method
         {
-                departmentBL.DeleteDepartment(department);
+                this.departmentBL.DeleteDepartment(department);
                 return RedirectToAction("ViewDepartment");
         }
         [HttpGet]
@@ -79,9 +81,9 @@ namespace CircularManagementSystem.Controllers
         public ActionResult AddEmployee()           //Add Employee GEt Method
         {
            
-                ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
-                ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
-                ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
+                ViewBag.Department = new SelectList(this.departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
+                ViewBag.Designation = new SelectList(this.employeeBL.GetDesignations(), "DesignationId", "DesignationName");
+                ViewBag.Manager = new SelectList(this.employeeBL.GetManagers(), "ManagerId", "ManagerName");
                 return View();
             
         }
@@ -91,9 +93,9 @@ namespace CircularManagementSystem.Controllers
         public ActionResult AddEmployee(EmployeeModel employeeModel)        //Add Employee Post method
         {
             bool check = false;
-                ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
-                ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
-                ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
+                ViewBag.Department = new SelectList(this.departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
+                ViewBag.Designation = new SelectList(this.employeeBL.GetDesignations(), "DesignationId", "DesignationName");
+                ViewBag.Manager = new SelectList(this.employeeBL.GetManagers(), "ManagerId", "ManagerName");
                 bool result = employeeBL.CheckEmployee(employeeModel.EmployeeEmail, employeeModel.EmployeePhoneNumber);
                 
                 if (ModelState.IsValid&&result==check)
@@ -112,11 +114,13 @@ namespace CircularManagementSystem.Controllers
         }
         private void AddAccount(EmployeeModel employeeModel)        //Create Account for employee
         {
-            Account account = new Account();
-            account.EmployeeId = employeeBL.GetEmployeeId(employeeModel.EmployeeEmail);
-            account.EmployeeEmail = employeeModel.EmployeeEmail;
-            account.Password = employeeBL.GetPassword(employeeModel.EmployeeName, Convert.ToString(employeeModel.EmployeePhoneNumber));
-            account.Role = employeeBL.ChooseRole(employeeModel.ManagerId);
+            Account account = new Account
+            {
+                EmployeeId = employeeBL.GetEmployeeId(employeeModel.EmployeeEmail),
+                EmployeeEmail = employeeModel.EmployeeEmail,
+                Password = this.employeeBL.GetPassword(employeeModel.EmployeeName, Convert.ToString(employeeModel.EmployeePhoneNumber)),
+                Role = this.employeeBL.ChooseRole(employeeModel.ManagerId)
+            };
             employeeBL.AddAccount(account);
 
         }
@@ -132,10 +136,10 @@ namespace CircularManagementSystem.Controllers
         {
             if(ModelState.IsValid)
             {
-                ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
-                ViewBag.Designation = new SelectList(employeeBL.GetDesignations(), "DesignationId", "DesignationName");
-                ViewBag.Manager = new SelectList(employeeBL.GetManagers(), "ManagerId", "ManagerName");
-                Employee employee = employeeBL.GetEmployee(employeeId);
+                ViewBag.Department = new SelectList(this.departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
+                ViewBag.Designation = new SelectList(this.employeeBL.GetDesignations(), "DesignationId", "DesignationName");
+                ViewBag.Manager = new SelectList(this.employeeBL.GetManagers(), "ManagerId", "ManagerName");
+                Employee employee = this.employeeBL.GetEmployee(employeeId);
                 var employeeMap = AutoMapper.Mapper.Map<Employee, EmployeeModel>(employee);
                 return View(employeeMap);
             }
@@ -148,7 +152,7 @@ namespace CircularManagementSystem.Controllers
         public ActionResult EditEmployee(Employee employee)         //Edit employee details post method
         {
             
-                ViewBag.Department = new SelectList(departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
+                ViewBag.Department = new SelectList(this.departmentBL.GetDepartment(), "DepartmentId", "DepartmentName");
                 employeeBL.EditEmployee(employee);
                 return RedirectToAction("ViewEmployee");
             
@@ -158,7 +162,7 @@ namespace CircularManagementSystem.Controllers
         public ActionResult DeleteEmployee(int employeeId)      //Delete employee details get method
         {
             
-                Employee employee = employeeBL.GetEmployee(employeeId);
+                Employee employee = this.employeeBL.GetEmployee(employeeId);
                 return View(employee);
             
         }
@@ -168,7 +172,7 @@ namespace CircularManagementSystem.Controllers
         public ActionResult DeleteEmployee(Employee employee)       //Delete employee Details post method
         {
             
-                employeeBL.DeleteEmployee(employee);
+                this.employeeBL.DeleteEmployee(employee);
                 return RedirectToAction("ViewEmployee");
             
         }
